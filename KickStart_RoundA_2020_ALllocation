@@ -1,0 +1,44 @@
+//ALLOCATION
+#include<iostream>
+#include<string>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int no_test_case;
+    std::cin>>no_test_case;
+    int caseV=1;
+    
+    for(int i=0;i<no_test_case;i++)
+    {
+        int N,B;
+        std::cin>>N>>B;
+        
+        int A[N];
+        for(int j=0;j<N;j++)
+        {
+            std::cin>>A[j];    
+        }
+        
+        //sorting
+        sort(A,A+N);
+        int sum=0,y=0;
+        for(int j=0;j<N;j++)
+        {
+           if(B>=sum)
+           {
+               sum+=A[j];
+               y++;
+               if(sum>B)
+               {
+                   sum-=A[j];
+                   y--;
+               }
+           }
+        }
+        std::cout<<"Case #"<<caseV<<": "<<y<<"\n";
+        caseV++;
+    }
+    return 0;
+}
