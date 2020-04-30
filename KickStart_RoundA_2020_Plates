@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+const int N = 51;
+const int K = 31;
+int val[N][K],f[N][K*N];
+
+int main() 
+{
+  	int no_test_case;
+	std::cin>>no_test_case;
+    int caseV=1;
+    
+    for(int i=0;i<no_test_case;i++)
+    {	
+        int  n,k,p;
+        std::cin>>n>>k>>p;
+        for (int i=1;i<=n;i++)
+            for (int j=1;j<=k;j++) 
+            {
+                std::cin>>val[i][j];
+                val[i][j]+=val[i][j-1];
+            }
+ 
+        memset(f, 0, sizeof f);
+ 
+        for (int i=1;i<=n;i++)
+            for (int j=1;j<=p;j++) 
+            {
+                int lim = min(j, k);
+                for (int l = 0; l <= lim; l++)
+                    f[i][j] = max(f[i][j], f[i - 1][j - l] + val[i][l]);
+            }
+  	    
+  	    std::cout<<"Case #"<<caseV<<": "<<f[n][p]<<"\n";
+    	caseV++;
+    }
+    return 0;
+}
